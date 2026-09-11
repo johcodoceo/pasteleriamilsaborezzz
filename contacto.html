@@ -20,6 +20,14 @@
         </script>
         <script defer src="js/principal.js">
         </script>
+
+        <!-- Validaciones compartidas y controlador de esta vista. -->
+        <script defer src="js/validaciones.js">
+        </script>
+        <script defer src="js/formularios.js">
+        </script>
+        <script defer src="js/contacto.js">
+        </script>
     </head>
     <body>
         <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -84,17 +92,99 @@
                 </p>
             </noscript>
             <section class="page-heading container">
-                <p class="eyebrow">PRÓXIMAMENTE</p>
+                <p class="eyebrow">MIL SABORES</p>
                 <h1>Conversemos.</h1>
-                <p class="lede">Pronto podrás escribirnos desde este espacio.</p>
+                <p class="lede">Cuéntanos en qué podemos ayudarte.</p>
             </section>
-            <section class="container pending-wrap">
-                <div class="pending">
-                    <span class="small-label">Estamos preparando esta sección</span>
-                    <h2>Un paso más cerca de tu próxima celebración.</h2>
-                    <p>Mientras tanto, descubre nuestra selección de tortas y repostería.</p>
-                    <a class="button" href="productos.html">Explorar productos</a>
-                </div>
+            <section class="container forms-section form-narrow">
+                <p class="demo-note">
+                    Formulario de demostración: puedes comprobar los datos, pero el mensaje no se
+                    envía.
+                </p>
+                <form id="formulario-contacto" class="form-panel" novalidate>
+                    <div
+                        class="form-result"
+                        data-resultado
+                        role="status"
+                        tabindex="-1"
+                        hidden
+                    >
+                    </div>
+                    <div class="form-field">
+                        <label for="nombre">Nombre</label>
+                        <p id="ayuda-nombre" class="field-help">Hasta 100 caracteres.</p>
+                        <input
+                            id="nombre"
+                            name="nombre"
+                            data-validar
+                            aria-describedby="ayuda-nombre error-nombre"
+                            required
+                            autocomplete="name"
+                            maxlength="100"
+                            type="text"
+                        >
+                        <p
+                            id="error-nombre"
+                            class="field-error"
+                            data-error-para="nombre"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <div class="form-field">
+                        <label for="correo">
+                            Correo electrónico <span class="optional-label">(opcional)</span>
+                        </label>
+                        <p id="ayuda-correo" class="field-help">
+                            Si lo completas, usa @duoc.cl, @profesor.duoc.cl o @gmail.com.
+                        </p>
+                        <input
+                            id="correo"
+                            name="correo"
+                            data-validar
+                            aria-describedby="ayuda-correo error-correo"
+                            autocomplete="email"
+                            maxlength="100"
+                            type="email"
+                        >
+                        <p
+                            id="error-correo"
+                            class="field-error"
+                            data-error-para="correo"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <div class="form-field">
+                        <label for="comentario">Comentario</label>
+                        <p id="ayuda-comentario" class="field-help">
+                            Cuéntanos tu consulta en un máximo de 500 caracteres.
+                        </p>
+                        <textarea
+                            id="comentario"
+                            name="comentario"
+                            data-validar
+                            aria-describedby="ayuda-comentario error-comentario"
+                            required
+                            maxlength="500"
+                            rows="6"
+                        ></textarea>
+                        <p
+                            id="error-comentario"
+                            class="field-error"
+                            data-error-para="comentario"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <p class="field-counter" data-contador="comentario">0 / 500</p>
+                    <div class="form-actions">
+                        <button class="button" type="submit">Validar mensaje</button>
+                    </div>
+                </form>
             </section>
         </main>
 

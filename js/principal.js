@@ -55,7 +55,7 @@ window.Interfaz = (function () {
 
         if (window.location.protocol === "file:") {
             mensaje =
-                "Para conservar el carrito entre páginas, abre este proyecto " +
+                "Para conservar los datos entre páginas, abre este proyecto " +
                 "con Live Server. Revisa las instrucciones del archivo README.";
         }
 
