@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es-CL">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Órdenes | Gestión Mil Sabores</title>
+        <meta
+            name="description"
+            content="Pastelería Mil Sabores: tradición, tortas y repostería para compartir. Proyecto académico DSY1104."
+        >
+        <meta name="theme-color" content="#FFF5E1">
+        <link rel="stylesheet" href="../css/estilos.css">
+
+        <!-- defer conserva el orden y espera a que exista el HTML. -->
+        <script defer src="../js/productos.js"></script>
+        <script defer src="../js/validaciones.js"></script>
+        <script defer src="../js/inventario.js"></script>
+        <script defer src="../js/utilidades.js"></script>
+        <script defer src="../js/carrito.js"></script>
+        <script defer src="../js/principal.js"></script>
+        <script defer src="../js/regiones.js"></script>
+        <script defer src="../js/credenciales-demo.js"></script>
+        <script defer src="../js/cuentas-demo.js"></script>
+        <script defer src="../js/formularios.js"></script>
+        <script defer src="../js/ubicacion-formulario.js"></script>
+        <script defer src="../js/administracion.js"></script>
+        <script defer src="../js/datos-ordenes.js"></script>
+        <script defer src="../js/ordenes.js"></script>
+        <script defer src="../js/admin-ordenes.js"></script>
+    </head>
+    <body>
+        <a class="skip-link" href="#contenido">Saltar al contenido</a>
+        <div class="anniversary">
+            50 años compartiendo dulces momentos
+            <span aria-hidden="true">✦</span>
+            Pastelería chilena
+        </div>
+
+        <!-- Cabecera compartida y navegación principal. -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="../index.html" aria-label="Mil Sabores, inicio">
+                    <span class="brand-name">Mil Sabores<span class="brand-dot">.</span></span>
+                    <span class="brand-caption">PASTELERÍA · DESDE EL CORAZÓN</span>
+                </a>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    Menú <span aria-hidden="true">☰</span>
+                </button>
+                <nav id="menu-principal" class="main-nav" aria-label="Principal">
+                    <a href="../index.html">Inicio</a>
+                    <a href="../productos.html">Productos</a>
+                    <a href="../nosotros.html">Nosotros</a>
+                    <a href="../blog.html">Blog</a>
+                    <a href="../contacto.html">Contacto</a>
+                </nav>
+                <div class="header-actions">
+                    <a class="account-link" href="../login.html">Mi cuenta</a>
+                    <a class="bag-link" href="../carrito.html" aria-label="Ver carrito">
+                        <svg
+                            width="19"
+                            height="21"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 7h14l1 14H4L5 7Z">
+                            </path>
+                            <path d="M8 8V6a4 4 0 0 1 8 0v2">
+                            </path>
+                        </svg>
+                        <span class="bag-label">Carrito</span>
+                        <span class="cart-count" data-contador-carrito aria-hidden="true">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main id="contenido">
+            <p id="aviso-almacenamiento" class="container storage-notice" role="status" hidden></p>
+            <noscript><p class="container storage-notice">Activa JavaScript para usar la administración.</p></noscript>
+            <div class="container admin-heading">
+                <p class="eyebrow">GESTIÓN MIL SABORES</p>
+                <h1>Órdenes</h1>
+                <p class="field-help">Demostración local: usa datos ficticios para practicar.</p>
+            </div>
+            <section id="acceso-administracion" class="container form-narrow admin-access">
+                <div class="form-panel">
+                    <h2>Acceso al panel</h2>
+                    <p id="mensaje-acceso" role="status" tabindex="-1">Comprobando la sesión…</p>
+                    <div class="form-actions">
+                        <a class="button" href="../login.html">Iniciar sesión</a>
+                        <a
+                            id="ir-productos-panel"
+                            class="text-link"
+                            href="productos.html"
+                            data-acceso-vendedor
+                            hidden
+                        >Consultar productos</a>
+                        <a
+                            class="text-link"
+                            href="ordenes.html"
+                            data-acceso-vendedor
+                            hidden
+                        >Consultar órdenes</a>
+                        <a class="text-link" href="../index.html">Volver a la tienda</a>
+                    </div>
+                    <details class="demo-setup">
+                        <summary>Cuentas de ejemplo para practicar</summary>
+                        <p>Prepara estas cuentas una vez en este navegador. No se reemplazan cuentas existentes.</p>
+                        <button id="preparar-demostracion" class="button button-outline" type="button">
+                            Preparar cuentas de demostración
+                        </button>
+                        <p id="resultado-preparacion" role="status" tabindex="-1" hidden></p>
+                        <dl class="demo-credentials">
+                            <div><dt>Administrador</dt><dd>demo.admin@duoc.cl · Clave: <code>Admin123</code></dd></div>
+                            <div><dt>Vendedor</dt><dd>demo.vendedor@duoc.cl · Clave: <code>Vende123</code></dd></div>
+                        </dl>
+                        <p class="field-help">Son las credenciales iniciales; si las editas, utiliza tus nuevos datos.</p>
+                    </details>
+                </div>
+            </section>
+            <div id="area-administrativa" hidden>
+                <div class="container admin-session">
+                    <p id="nombre-administrador"></p>
+                    <button id="salir-administracion" class="text-button" type="button">Cerrar sesión</button>
+                </div>
+                <div class="container admin-layout">
+                    <nav class="admin-nav" aria-label="Gestión">
+                        <a href="index.html" data-solo-admin>Resumen</a>
+                        <a href="productos.html">Productos</a>
+                        <a href="ordenes.html" aria-current="page">Órdenes</a>
+                        <a href="usuarios.html" data-solo-admin>Usuarios</a>
+                        <a href="../index.html">Volver a la tienda</a>
+                    </nav>
+                    <div class="admin-content">
+                        <p id="mensaje-administracion" class="form-result" role="status" tabindex="-1" hidden></p>
+                        <h2>Listado de órdenes</h2>
+                        <p class="field-help">Consulta los datos y los productos de cada orden ficticia.</p>
+                        <p id="cantidad-ordenes" class="field-help" role="status"></p>
+                        <div
+                            id="tabla-ordenes"
+                            class="table-scroll"
+                            tabindex="0"
+                            role="region"
+                            aria-label="Tabla de órdenes"
+                            hidden
+                        >
+                            <table class="admin-table">
+                                <caption class="sr-only">Órdenes de demostración y enlaces a su detalle</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Cliente</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col" class="numeric-cell">Total</th>
+                                        <th scope="col">Detalle</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="filas-ordenes"></tbody>
+                            </table>
+                        </div>
+                        <p id="lista-vacia" class="empty-records" hidden>No hay órdenes disponibles.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Pie de página compartido. -->
+        <footer class="site-footer">
+            <div class="container footer-grid">
+                <div>
+                    <a class="brand footer-brand" href="../index.html">
+                        <span class="brand-name">Mil Sabores.</span>
+                    </a>
+                    <p>La tradición se comparte.<br>Los buenos momentos, también.</p>
+                </div>
+                <div>
+                    <h2>La pastelería</h2>
+                    <a href="../nosotros.html">Nuestra historia</a>
+                    <a href="../blog.html">Historias y recetas</a>
+                    <a href="../contacto.html">Contacto</a>
+                </div>
+                <div>
+                    <h2>Tu visita</h2>
+                    <a href="../productos.html">Explorar productos</a>
+                    <a href="../registro.html">Crear cuenta</a>
+                    <a href="../admin/index.html">Administración</a>
+                </div>
+            </div>
+            <div class="container footer-bottom">
+                <span>Mil Sabores · Proyecto académico DSY1104</span>
+                <span>Prototipo en desarrollo · Sin ventas reales</span>
+            </div>
+        </footer>
+
+        <!-- Mensajes de agregar, modificar o eliminar productos. -->
+        <div
+            id="notificacion"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        >
+        </div>
+    </body>
+</html>

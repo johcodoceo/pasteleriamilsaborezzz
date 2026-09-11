@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="es-CL">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Mi cuenta | Mil Sabores</title>
+        <meta
+            name="description"
+            content="Pastelería Mil Sabores: tradición, tortas y repostería para compartir. Proyecto académico DSY1104."
+        >
+        <meta name="theme-color" content="#FFF5E1">
+        <link rel="stylesheet" href="css/estilos.css">
+
+        <!-- defer conserva el orden y espera a que exista el HTML. -->
+        <script defer src="js/productos.js">
+        </script>
+        <script defer src="js/validaciones.js"></script>
+        <script defer src="js/inventario.js"></script>
+        <script defer src="js/utilidades.js">
+        </script>
+        <script defer src="js/carrito.js">
+        </script>
+        <script defer src="js/principal.js">
+        </script>
+
+        <!-- Validaciones compartidas y controlador de esta vista. -->
+        <script defer src="js/regiones.js">
+        </script>
+        <script defer src="js/credenciales-demo.js">
+        </script>
+        <script defer src="js/cuentas-demo.js">
+        </script>
+        <script defer src="js/formularios.js">
+        </script>
+        <script defer src="js/login.js">
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#contenido">Saltar al contenido</a>
+        <div class="anniversary">
+            50 años compartiendo dulces momentos
+            <span aria-hidden="true">✦</span>
+            Pastelería chilena
+        </div>
+
+        <!-- Cabecera compartida y navegación principal. -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html" aria-label="Mil Sabores, inicio">
+                    <span class="brand-name">Mil Sabores<span class="brand-dot">.</span></span>
+                    <span class="brand-caption">PASTELERÍA · DESDE EL CORAZÓN</span>
+                </a>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    Menú <span aria-hidden="true">☰</span>
+                </button>
+                <nav id="menu-principal" class="main-nav" aria-label="Principal">
+                    <a href="index.html">Inicio</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+                <div class="header-actions">
+                    <a class="account-link" href="login.html">Mi cuenta</a>
+                    <a class="bag-link" href="carrito.html" aria-label="Ver carrito">
+                        <svg
+                            width="19"
+                            height="21"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 7h14l1 14H4L5 7Z">
+                            </path>
+                            <path d="M8 8V6a4 4 0 0 1 8 0v2">
+                            </path>
+                        </svg>
+                        <span class="bag-label">Carrito</span>
+                        <span class="cart-count" data-contador-carrito aria-hidden="true">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main id="contenido">
+
+            <!-- Aviso persistente si el navegador no puede guardar los cambios. -->
+            <p id="aviso-almacenamiento" class="container storage-notice" role="status" hidden></p>
+            <noscript>
+                <p class="container storage-notice">
+                    Activa JavaScript para usar el catálogo y el carrito.
+                </p>
+            </noscript>
+            <section class="page-heading container">
+                <p class="eyebrow">MIL SABORES</p>
+                <h1>Qué gusto verte de nuevo.</h1>
+                <p class="lede">Ingresa con la cuenta que registraste en este navegador.</p>
+            </section>
+            <section class="container forms-section form-narrow">
+                <p class="demo-note">
+                    Acceso local de demostración. Los perfiles permiten practicar las acciones
+                    de cada usuario; no es una cuenta real.
+                </p>
+                <form id="formulario-login" class="form-panel" novalidate>
+                    <div
+                        class="form-result"
+                        data-resultado
+                        role="status"
+                        tabindex="-1"
+                        hidden
+                    >
+                    </div>
+                    <div class="form-field">
+                        <label for="correo">Correo electrónico</label>
+                        <p id="ayuda-correo" class="field-help">
+                            Usa @duoc.cl, @profesor.duoc.cl o @gmail.com.
+                        </p>
+                        <input
+                            id="correo"
+                            name="correo"
+                            data-validar
+                            aria-describedby="ayuda-correo error-correo"
+                            required
+                            autocomplete="username"
+                            maxlength="100"
+                            type="email"
+                        >
+                        <p
+                            id="error-correo"
+                            class="field-error"
+                            data-error-para="correo"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <div class="form-field">
+                        <label for="contrasena">Contraseña</label>
+                        <p id="ayuda-contrasena" class="field-help">Entre 4 y 10 caracteres.</p>
+                        <div class="password-control">
+                            <input
+                                id="contrasena"
+                                name="contrasena"
+                                data-validar
+                                aria-describedby="ayuda-contrasena error-contrasena"
+                                required
+                                autocomplete="current-password"
+                                maxlength="10"
+                                minlength="4"
+                                type="password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-mostrar-clave="contrasena"
+                                aria-controls="contrasena"
+                                aria-pressed="false"
+                            >
+                                Mostrar
+                            </button>
+                        </div>
+                        <p
+                            id="error-contrasena"
+                            class="field-error"
+                            data-error-para="contrasena"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <div class="form-actions">
+                        <button class="button" type="submit">Iniciar sesión</button>
+                        <a class="text-link" href="registro.html">Crear una cuenta</a>
+                    </div>
+                </form>
+                <section id="sesion-activa" class="form-panel success-panel" hidden>
+                    <p class="eyebrow">MI CUENTA</p>
+                    <h2 tabindex="-1">Hola, <span data-nombre-sesion></span>.</h2>
+                    <p data-correo-sesion></p>
+                    <p>Tu sesión de demostración está activa en esta pestaña.</p>
+                    <div class="form-actions">
+                        <a class="button" href="productos.html">Explorar productos</a>
+                        <a id="ir-administracion" class="button button-outline" href="admin/index.html" hidden>
+                            Abrir panel de gestión
+                        </a>
+                        <button id="cerrar-sesion" class="text-button" type="button">
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <!-- Pie de página compartido. -->
+        <footer class="site-footer">
+            <div class="container footer-grid">
+                <div>
+                    <a class="brand footer-brand" href="index.html">
+                        <span class="brand-name">Mil Sabores.</span>
+                    </a>
+                    <p>La tradición se comparte.<br>Los buenos momentos, también.</p>
+                </div>
+                <div>
+                    <h2>La pastelería</h2>
+                    <a href="nosotros.html">Nuestra historia</a>
+                    <a href="blog.html">Historias y recetas</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+                <div>
+                    <h2>Tu visita</h2>
+                    <a href="productos.html">Explorar productos</a>
+                    <a href="registro.html">Crear cuenta</a>
+                    <a href="admin/index.html">Administración</a>
+                </div>
+            </div>
+            <div class="container footer-bottom">
+                <span>Mil Sabores · Proyecto académico DSY1104</span>
+                <span>Prototipo en desarrollo · Sin ventas reales</span>
+            </div>
+        </footer>
+
+        <!-- Mensajes de agregar, modificar o eliminar productos. -->
+        <div
+            id="notificacion"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        >
+        </div>
+    </body>
+</html>

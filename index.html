@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es-CL">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Inicio | Mil Sabores</title>
+        <meta
+            name="description"
+            content="Pastelería Mil Sabores: tradición, tortas y repostería para compartir. Proyecto académico DSY1104."
+        >
+        <meta name="theme-color" content="#FFF5E1">
+        <link rel="stylesheet" href="css/estilos.css">
+
+        <!-- defer conserva el orden y espera a que exista el HTML. -->
+        <script defer src="js/productos.js">
+        </script>
+        <script defer src="js/validaciones.js"></script>
+        <script defer src="js/inventario.js"></script>
+        <script defer src="js/utilidades.js">
+        </script>
+        <script defer src="js/carrito.js">
+        </script>
+        <script defer src="js/principal.js">
+        </script>
+        <script defer src="js/catalogo.js">
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#contenido">Saltar al contenido</a>
+        <div class="anniversary">
+            50 años compartiendo dulces momentos
+            <span aria-hidden="true">✦</span>
+            Pastelería chilena
+        </div>
+
+        <!-- Cabecera compartida y navegación principal. -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html" aria-label="Mil Sabores, inicio">
+                    <span class="brand-name">Mil Sabores<span class="brand-dot">.</span></span>
+                    <span class="brand-caption">PASTELERÍA · DESDE EL CORAZÓN</span>
+                </a>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    Menú <span aria-hidden="true">☰</span>
+                </button>
+                <nav id="menu-principal" class="main-nav" aria-label="Principal">
+                    <a href="index.html" aria-current="page">Inicio</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="nosotros.html">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+                <div class="header-actions">
+                    <a class="account-link" href="login.html">Mi cuenta</a>
+                    <a class="bag-link" href="carrito.html" aria-label="Ver carrito">
+                        <svg
+                            width="19"
+                            height="21"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 7h14l1 14H4L5 7Z">
+                            </path>
+                            <path d="M8 8V6a4 4 0 0 1 8 0v2">
+                            </path>
+                        </svg>
+                        <span class="bag-label">Carrito</span>
+                        <span class="cart-count" data-contador-carrito aria-hidden="true">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main id="contenido">
+
+            <!-- Aviso persistente si el navegador no puede guardar los cambios. -->
+            <p id="aviso-almacenamiento" class="container storage-notice" role="status" hidden></p>
+            <noscript>
+                <p class="container storage-notice">
+                    Activa JavaScript para usar el catálogo y el carrito.
+                </p>
+            </noscript>
+            <section class="hero container">
+                <div class="hero-copy">
+                    <p class="eyebrow"><span class="short-line"></span> HECHO PARA COMPARTIR</p>
+                    <h1>Hay momentos<br>que merecen<br><em>algo dulce.</em></h1>
+                    <p class="hero-description">
+                        Tortas, recetas de siempre y ese sabor que nos reúne. Celebramos 50 años
+                        siendo parte de tu mesa.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button" href="productos.html">
+                            Descubre nuestros sabores <span aria-hidden="true">↗</span>
+                        </a>
+                        <a class="text-link" href="nosotros.html">Nuestra historia</a>
+                    </div>
+                    <div class="hero-note">
+                        <span aria-hidden="true">✦</span>
+                        <span>Tradición chilena, un pedacito a la vez.</span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img
+                        src="assets/torta-chocolate.jpg"
+                        width="1536"
+                        height="1024"
+                        alt="Torta de chocolate con frutillas sobre un pedestal de cerámica"
+                        fetchpriority="high"
+                    >
+                    <div class="anniversary-seal">
+                        <span>CELEBRAMOS</span>
+                        <strong>50</strong>
+                        <span>AÑOS DE HISTORIA</span>
+                    </div>
+                    <div class="photo-caption">
+                        <span>El sabor de celebrar juntos</span>
+                        <span aria-hidden="true">✦</span>
+                    </div>
+                </div>
+            </section>
+            <section class="values-strip">
+                <div class="container values">
+                    <span>Recetas que nos reúnen</span>
+                    <span aria-hidden="true">✦</span>
+                    <span>Un sabor para cada ocasión</span>
+                    <span aria-hidden="true">✦</span>
+                    <span>50 años de tradición</span>
+                </div>
+            </section>
+            <section class="container section-space">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">PARA TU PRÓXIMA CELEBRACIÓN</p>
+                        <h2>Un antojo, mil posibilidades.</h2>
+                    </div>
+                    <a class="text-link" href="productos.html">
+                        Ver todos los productos <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+                <div class="product-grid" data-products="featured">
+                </div>
+            </section>
+            <section class="story-band container">
+                <div>
+                    <p class="eyebrow">NUESTRAS RAÍCES</p>
+                    <h2>Mucho más que<br>una receta.</h2>
+                </div>
+                <div>
+                    <p>
+                        Somos parte de una historia de repostería chilena. Una historia hecha de
+                        celebraciones, creatividad y sabores que pasan de una mesa a otra.
+                    </p>
+                    <a class="text-link" href="nosotros.html">
+                        Conoce Mil Sabores <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+                <span class="story-number" aria-hidden="true">50</span>
+            </section>
+            <section class="container journal section-space">
+                <div>
+                    <p class="eyebrow">DE NUESTRA COCINA</p>
+                    <h2>Historias para saborear.</h2>
+                </div>
+                <a class="journal-link" href="articulo.html?id=tradicion">
+                    <span class="small-label">NUESTRA HISTORIA</span>
+                    <h3>La tradición de compartir una torta</h3>
+                    <span class="text-link">Leer historia ↗</span>
+                </a>
+                <a class="journal-link" href="articulo.html?id=celebrar">
+                    <span class="small-label">INSPIRACIÓN</span>
+                    <h3>Pequeños detalles para una gran celebración</h3>
+                    <span class="text-link">Leer artículo ↗</span>
+                </a>
+            </section>
+        </main>
+
+        <!-- Pie de página compartido. -->
+        <footer class="site-footer">
+            <div class="container footer-grid">
+                <div>
+                    <a class="brand footer-brand" href="index.html">
+                        <span class="brand-name">Mil Sabores.</span>
+                    </a>
+                    <p>La tradición se comparte.<br>Los buenos momentos, también.</p>
+                </div>
+                <div>
+                    <h2>La pastelería</h2>
+                    <a href="nosotros.html">Nuestra historia</a>
+                    <a href="blog.html">Historias y recetas</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+                <div>
+                    <h2>Tu visita</h2>
+                    <a href="productos.html">Explorar productos</a>
+                    <a href="registro.html">Crear cuenta</a>
+                    <a href="admin/index.html">Administración</a>
+                </div>
+            </div>
+            <div class="container footer-bottom">
+                <span>Mil Sabores · Proyecto académico DSY1104</span>
+                <span>Prototipo en desarrollo · Sin ventas reales</span>
+            </div>
+        </footer>
+
+        <!-- Mensajes de agregar, modificar o eliminar productos. -->
+        <div
+            id="notificacion"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        >
+        </div>
+    </body>
+</html>

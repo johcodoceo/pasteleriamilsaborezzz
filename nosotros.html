@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es-CL">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Nosotros | Mil Sabores</title>
+        <meta
+            name="description"
+            content="Pastelería Mil Sabores: tradición, tortas y repostería para compartir. Proyecto académico DSY1104."
+        >
+        <meta name="theme-color" content="#FFF5E1">
+        <link rel="stylesheet" href="css/estilos.css">
+
+        <!-- defer conserva el orden y espera a que exista el HTML. -->
+        <script defer src="js/productos.js">
+        </script>
+        <script defer src="js/validaciones.js"></script>
+        <script defer src="js/inventario.js"></script>
+        <script defer src="js/utilidades.js">
+        </script>
+        <script defer src="js/carrito.js">
+        </script>
+        <script defer src="js/principal.js">
+        </script>
+    </head>
+    <body>
+        <a class="skip-link" href="#contenido">Saltar al contenido</a>
+        <div class="anniversary">
+            50 años compartiendo dulces momentos
+            <span aria-hidden="true">✦</span>
+            Pastelería chilena
+        </div>
+
+        <!-- Cabecera compartida y navegación principal. -->
+        <header class="site-header">
+            <div class="container header-inner">
+                <a class="brand" href="index.html" aria-label="Mil Sabores, inicio">
+                    <span class="brand-name">Mil Sabores<span class="brand-dot">.</span></span>
+                    <span class="brand-caption">PASTELERÍA · DESDE EL CORAZÓN</span>
+                </a>
+                <button
+                    class="menu-toggle"
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="menu-principal"
+                >
+                    Menú <span aria-hidden="true">☰</span>
+                </button>
+                <nav id="menu-principal" class="main-nav" aria-label="Principal">
+                    <a href="index.html">Inicio</a>
+                    <a href="productos.html">Productos</a>
+                    <a href="nosotros.html" aria-current="page">Nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </nav>
+                <div class="header-actions">
+                    <a class="account-link" href="login.html">Mi cuenta</a>
+                    <a class="bag-link" href="carrito.html" aria-label="Ver carrito">
+                        <svg
+                            width="19"
+                            height="21"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.6"
+                            aria-hidden="true"
+                        >
+                            <path d="M5 7h14l1 14H4L5 7Z">
+                            </path>
+                            <path d="M8 8V6a4 4 0 0 1 8 0v2">
+                            </path>
+                        </svg>
+                        <span class="bag-label">Carrito</span>
+                        <span class="cart-count" data-contador-carrito aria-hidden="true">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main id="contenido">
+
+            <!-- Aviso persistente si el navegador no puede guardar los cambios. -->
+            <p id="aviso-almacenamiento" class="container storage-notice" role="status" hidden></p>
+            <noscript>
+                <p class="container storage-notice">
+                    Activa JavaScript para usar el catálogo y el carrito.
+                </p>
+            </noscript>
+            <section class="page-heading container">
+                <p class="eyebrow">50 AÑOS DE HISTORIA</p>
+                <h1>La tradición se comparte.</h1>
+                <p class="lede">
+                    Una pastelería chilena que celebra sus raíces y mira hacia el futuro.
+                </p>
+            </section>
+            <section class="container prose-layout">
+                <div class="prose">
+                    <h2>Una historia de grandes momentos</h2>
+                    <p>
+                        Mil Sabores celebra su aniversario número 50 como referente de la repostería
+                        chilena. Su historia incluye la participación en la creación de la torta más
+                        grande del mundo en 1995, según el caso académico que inspira este proyecto.
+                    </p>
+                    <h2>Nuestra misión</h2>
+                    <p>
+                        Ofrecer una experiencia dulce y memorable, con tortas y productos de
+                        repostería de alta calidad para todas las ocasiones, celebrando nuestras
+                        raíces y la creatividad.
+                    </p>
+                    <h2>Nuestra visión</h2>
+                    <p>
+                        Ser una tienda online líder de repostería en Chile, reconocida por la
+                        innovación, la calidad y el apoyo a nuevos talentos de gastronomía.
+                    </p>
+                    <h2>El equipo detrás del proyecto</h2>
+                    <p>
+                        Proyecto semestral de Desarrollo Full Stack II, DSY1104. La información de
+                        los integrantes se incorporará al confirmar el equipo.
+                    </p>
+                </div>
+                <aside class="quote-panel">
+                    <span class="eyebrow">MIL SABORES</span>
+                    <p>Los mejores recuerdos suelen empezar alrededor de una mesa.</p>
+                    <a class="text-link" href="productos.html">Descubre el catálogo ↗</a>
+                </aside>
+            </section>
+        </main>
+
+        <!-- Pie de página compartido. -->
+        <footer class="site-footer">
+            <div class="container footer-grid">
+                <div>
+                    <a class="brand footer-brand" href="index.html">
+                        <span class="brand-name">Mil Sabores.</span>
+                    </a>
+                    <p>La tradición se comparte.<br>Los buenos momentos, también.</p>
+                </div>
+                <div>
+                    <h2>La pastelería</h2>
+                    <a href="nosotros.html">Nuestra historia</a>
+                    <a href="blog.html">Historias y recetas</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+                <div>
+                    <h2>Tu visita</h2>
+                    <a href="productos.html">Explorar productos</a>
+                    <a href="registro.html">Crear cuenta</a>
+                    <a href="admin/index.html">Administración</a>
+                </div>
+            </div>
+            <div class="container footer-bottom">
+                <span>Mil Sabores · Proyecto académico DSY1104</span>
+                <span>Prototipo en desarrollo · Sin ventas reales</span>
+            </div>
+        </footer>
+
+        <!-- Mensajes de agregar, modificar o eliminar productos. -->
+        <div
+            id="notificacion"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+        >
+        </div>
+    </body>
+</html>
