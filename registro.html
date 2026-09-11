@@ -14,11 +14,27 @@
         <!-- defer conserva el orden y espera a que exista el HTML. -->
         <script defer src="js/productos.js">
         </script>
+        <script defer src="js/validaciones.js"></script>
+        <script defer src="js/inventario.js"></script>
         <script defer src="js/utilidades.js">
         </script>
         <script defer src="js/carrito.js">
         </script>
         <script defer src="js/principal.js">
+        </script>
+
+        <!-- Validaciones compartidas y controlador de esta vista. -->
+        <script defer src="js/regiones.js">
+        </script>
+        <script defer src="js/credenciales-demo.js">
+        </script>
+        <script defer src="js/cuentas-demo.js">
+        </script>
+        <script defer src="js/formularios.js">
+        </script>
+        <script defer src="js/ubicacion-formulario.js">
+        </script>
+        <script defer src="js/registro.js">
         </script>
     </head>
     <body>
@@ -84,17 +100,349 @@
                 </p>
             </noscript>
             <section class="page-heading container">
-                <p class="eyebrow">PRÓXIMAMENTE</p>
-                <h1>Tu próxima historia comienza aquí.</h1>
-                <p class="lede">Estamos preparando el registro y los beneficios de Mil Sabores.</p>
+                <p class="eyebrow">MIL SABORES</p>
+                <h1>Tu cuenta, a un paso.</h1>
+                <p class="lede">Completa tus datos para crear una cuenta de Mil Sabores.</p>
             </section>
-            <section class="container pending-wrap">
-                <div class="pending">
-                    <span class="small-label">Estamos preparando esta sección</span>
-                    <h2>Un paso más cerca de tu próxima celebración.</h2>
-                    <p>Mientras tanto, descubre nuestra selección de tortas y repostería.</p>
-                    <a class="button" href="login.html">Ir a mi cuenta</a>
-                </div>
+            <section class="container forms-section">
+                <p class="demo-note">
+                    Demostración EV1: utiliza datos de prueba y una contraseña exclusiva para este
+                    ejercicio. La cuenta se guarda únicamente en este navegador.
+                </p>
+                <form id="formulario-registro" class="form-panel" novalidate>
+                    <div
+                        class="form-result"
+                        data-resultado
+                        role="status"
+                        tabindex="-1"
+                        hidden
+                    >
+                    </div>
+                    <p class="field-help">
+                        Los campos sin la indicación «opcional» son obligatorios.
+                    </p>
+                    <fieldset>
+                        <legend>
+                            Tus datos personales
+                        </legend>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="run">RUN</label>
+                                <p id="ayuda-run" class="field-help">
+                                    Sin puntos ni guion. Incluye el dígito verificador.
+                                </p>
+                                <input
+                                    id="run"
+                                    name="run"
+                                    data-validar
+                                    aria-describedby="ayuda-run error-run"
+                                    required
+                                    maxlength="9"
+                                    minlength="7"
+                                    type="text"
+                                >
+                                <p
+                                    id="error-run"
+                                    class="field-error"
+                                    data-error-para="run"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="nombre">Nombre</label>
+                                <p id="ayuda-nombre" class="field-help">Hasta 50 caracteres.</p>
+                                <input
+                                    id="nombre"
+                                    name="nombre"
+                                    data-validar
+                                    aria-describedby="ayuda-nombre error-nombre"
+                                    required
+                                    autocomplete="given-name"
+                                    maxlength="50"
+                                    type="text"
+                                >
+                                <p
+                                    id="error-nombre"
+                                    class="field-error"
+                                    data-error-para="nombre"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="apellidos">Apellidos</label>
+                                <p id="ayuda-apellidos" class="field-help">Hasta 100 caracteres.</p>
+                                <input
+                                    id="apellidos"
+                                    name="apellidos"
+                                    data-validar
+                                    aria-describedby="ayuda-apellidos error-apellidos"
+                                    required
+                                    autocomplete="family-name"
+                                    maxlength="100"
+                                    type="text"
+                                >
+                                <p
+                                    id="error-apellidos"
+                                    class="field-error"
+                                    data-error-para="apellidos"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="correo">Correo electrónico</label>
+                                <p id="ayuda-correo" class="field-help">
+                                    Usa @duoc.cl, @profesor.duoc.cl o @gmail.com.
+                                </p>
+                                <input
+                                    id="correo"
+                                    name="correo"
+                                    data-validar
+                                    aria-describedby="ayuda-correo error-correo"
+                                    required
+                                    autocomplete="email"
+                                    maxlength="100"
+                                    type="email"
+                                >
+                                <p
+                                    id="error-correo"
+                                    class="field-error"
+                                    data-error-para="correo"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="nacimiento">
+                                    Fecha de nacimiento <span class="optional-label">(opcional)</span>
+                                </label>
+                                <p id="ayuda-nacimiento" class="field-help">
+                                    Selecciona una fecha anterior o igual a hoy.
+                                </p>
+                                <input
+                                    id="nacimiento"
+                                    name="nacimiento"
+                                    data-validar
+                                    aria-describedby="ayuda-nacimiento error-nacimiento"
+                                    autocomplete="bday"
+                                    type="date"
+                                >
+                                <p
+                                    id="error-nacimiento"
+                                    class="field-error"
+                                    data-error-para="nacimiento"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="codigoPromocional">
+                                    Código promocional <span class="optional-label">(opcional)</span>
+                                </label>
+                                <p id="ayuda-codigoPromocional" class="field-help">
+                                    Si tienes el código FELICES50, puedes ingresarlo aquí.
+                                </p>
+                                <input
+                                    id="codigoPromocional"
+                                    name="codigoPromocional"
+                                    data-validar
+                                    aria-describedby="ayuda-codigoPromocional error-codigoPromocional"
+                                    type="text"
+                                >
+                                <p
+                                    id="error-codigoPromocional"
+                                    class="field-error"
+                                    data-error-para="codigoPromocional"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            Tu dirección
+                        </legend>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="region">Región</label>
+                                <p id="ayuda-region" class="field-help">
+                                    Elige la región donde se encuentra tu dirección.
+                                </p>
+                                <select
+                                    id="region"
+                                    name="region"
+                                    data-validar
+                                    aria-describedby="ayuda-region error-region"
+                                    required
+                                    autocomplete="address-level1"
+                                >
+                                    <option value="">
+                                        Selecciona tu región
+                                    </option>
+                                </select>
+                                <p
+                                    id="error-region"
+                                    class="field-error"
+                                    data-error-para="region"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="comuna">Comuna</label>
+                                <p id="ayuda-comuna" class="field-help">
+                                    La lista cambia según la región seleccionada.
+                                </p>
+                                <select
+                                    id="comuna"
+                                    name="comuna"
+                                    data-validar
+                                    aria-describedby="ayuda-comuna error-comuna"
+                                    required
+                                    autocomplete="address-level2"
+                                    disabled
+                                >
+                                    <option value="">
+                                        Primero selecciona
+                                        una región
+                                    </option>
+                                </select>
+                                <p
+                                    id="error-comuna"
+                                    class="field-error"
+                                    data-error-para="comuna"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="direccion">Dirección</label>
+                            <p id="ayuda-direccion" class="field-help">
+                                Calle, número y datos adicionales. Hasta 300 caracteres.
+                            </p>
+                            <input
+                                id="direccion"
+                                name="direccion"
+                                data-validar
+                                aria-describedby="ayuda-direccion error-direccion"
+                                required
+                                autocomplete="street-address"
+                                maxlength="300"
+                                type="text"
+                            >
+                            <p
+                                id="error-direccion"
+                                class="field-error"
+                                data-error-para="direccion"
+                                aria-live="polite"
+                                hidden
+                            >
+                            </p>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>
+                            Tu acceso
+                        </legend>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="contrasena">Contraseña</label>
+                                <p id="ayuda-contrasena" class="field-help">
+                                    Entre 4 y 10 caracteres, según la pauta EV1.
+                                </p>
+                                <div class="password-control">
+                                    <input
+                                        id="contrasena"
+                                        name="contrasena"
+                                        data-validar
+                                        aria-describedby="ayuda-contrasena error-contrasena"
+                                        required
+                                        autocomplete="new-password"
+                                        maxlength="10"
+                                        minlength="4"
+                                        type="password"
+                                    >
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        data-mostrar-clave="contrasena"
+                                        aria-controls="contrasena"
+                                        aria-pressed="false"
+                                    >
+                                        Mostrar
+                                    </button>
+                                </div>
+                                <p
+                                    id="error-contrasena"
+                                    class="field-error"
+                                    data-error-para="contrasena"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                            <div class="form-field">
+                                <label for="confirmacion">Repite la contraseña</label>
+                                <p id="ayuda-confirmacion" class="field-help">
+                                    Debe coincidir exactamente con la contraseña.
+                                </p>
+                                <div class="password-control">
+                                    <input
+                                        id="confirmacion"
+                                        name="confirmacion"
+                                        data-validar
+                                        aria-describedby="ayuda-confirmacion error-confirmacion"
+                                        required
+                                        autocomplete="new-password"
+                                        maxlength="10"
+                                        minlength="4"
+                                        type="password"
+                                    >
+                                    <button
+                                        type="button"
+                                        class="password-toggle"
+                                        data-mostrar-clave="confirmacion"
+                                        aria-controls="confirmacion"
+                                        aria-pressed="false"
+                                    >
+                                        Mostrar
+                                    </button>
+                                </div>
+                                <p
+                                    id="error-confirmacion"
+                                    class="field-error"
+                                    data-error-para="confirmacion"
+                                    aria-live="polite"
+                                    hidden
+                                >
+                                </p>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button class="button" type="submit">Crear cuenta de demostración</button>
+                        <a class="text-link" href="login.html">Ya tengo una cuenta</a>
+                    </div>
+                </form>
+                <section id="registro-completado" class="form-panel success-panel" hidden>
+                    <p class="eyebrow">CUENTA CREADA</p>
+                    <h2 tabindex="-1">Bienvenido, <span data-nombre-registrado></span>.</h2>
+                    <p>Tu cuenta de demostración quedó guardada en este navegador.</p>
+                    <p>Ya puedes iniciar sesión con el correo y la contraseña que elegiste.</p>
+                    <a class="button" href="login.html">Iniciar sesión</a>
+                </section>
             </section>
         </main>
 

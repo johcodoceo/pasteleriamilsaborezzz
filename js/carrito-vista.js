@@ -34,10 +34,11 @@
             Utilidades.formatearPrecio(item.subtotal);
 
         const campo = fila.querySelector("[data-cantidad]");
-        campo.id = `cantidad-${item.codigo}`;
+        const identificador = encodeURIComponent(item.codigo);
+        campo.id = `cantidad-${identificador}`;
         campo.value = item.cantidad;
-        campo.max = Carrito.CANTIDAD_MAXIMA;
-        campo.setAttribute("aria-describedby", `error-${item.codigo}`);
+        campo.max = item.limite;
+        campo.setAttribute("aria-describedby", `error-${identificador}`);
         campo.removeAttribute("aria-invalid");
 
         const etiqueta = fila.querySelector("label");
@@ -45,7 +46,7 @@
         etiqueta.textContent = `Cantidad de ${item.nombre}`;
 
         const error = fila.querySelector("[data-error]");
-        error.id = `error-${item.codigo}`;
+        error.id = `error-${identificador}`;
         error.textContent = "";
 
         const botonRestar = fila.querySelector('[data-accion="restar"]');
@@ -53,7 +54,7 @@
         const botonEliminar = fila.querySelector('[data-accion="eliminar"]');
 
         botonRestar.disabled = item.cantidad === 1;
-        botonSumar.disabled = item.cantidad === Carrito.CANTIDAD_MAXIMA;
+        botonSumar.disabled = item.cantidad >= item.limite;
         botonRestar.setAttribute("aria-label", `Quitar una unidad de ${item.nombre}`);
         botonSumar.setAttribute("aria-label", `Sumar una unidad de ${item.nombre}`);
         botonEliminar.setAttribute("aria-label", `Eliminar ${item.nombre} del carrito`);

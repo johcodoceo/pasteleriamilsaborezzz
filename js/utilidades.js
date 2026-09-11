@@ -8,11 +8,16 @@ window.Utilidades = (function () {
     const formatoCLP = new Intl.NumberFormat("es-CL", {
         style: "currency",
         currency: "CLP",
-        maximumFractionDigits: 0,
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2,
     });
 
     function formatearPrecio(valor) {
         return formatoCLP.format(valor);
+    }
+
+    function rutaImagen(ruta, prefijo = "") {
+        return ruta.startsWith("assets/") ? prefijo + ruta : ruta;
     }
 
     // Evita interpretar nombres o descripciones como etiquetas HTML.
@@ -32,6 +37,7 @@ window.Utilidades = (function () {
 
     return {
         formatearPrecio,
+        rutaImagen,
         escaparHTML,
     };
 })();

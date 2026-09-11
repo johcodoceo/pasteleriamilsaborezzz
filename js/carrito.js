@@ -7,20 +7,23 @@
  * Las vistas utilizan sus funciones públicas, definidas al final del archivo.
  */
 window.Carrito = (function () {
-    // Cambia esta constante si acuerdas otro límite para el prototipo.
-    // No representa stock: el caso todavía no entrega existencias.
+    // Límite por carrito del prototipo; también se respeta el stock del catálogo.
     const CANTIDAD_MAXIMA = 99;
     const CLAVE_ALMACENAMIENTO = "milSabores.carrito.v1";
 
     let avisoAlmacenamiento = "";
+    let avisoCatalogo = "";
     let items = cargarCarrito();
 
     // 1. VALIDACIÓN Y CONSULTAS
 
     function buscarProducto(codigo) {
-        return window.PRODUCTOS.find(function (producto) {
-            return producto.codigo === codigo;
-        });
+        return window.Inventario.buscar(codigo);
+    }
+
+    function obtenerLimite(codigo) {
+        const producto = buscarProducto(codigo);
+        return producto ? Math.min(producto.stock, CANTIDAD_MAXIMA) : 0;
     }
 
     function esCantidadValida(cantidad) {
@@ -63,6 +66,7 @@ window.Carrito = (function () {
                 precio: producto.precio,
                 cantidad: item.cantidad,
                 subtotal,
+                limite: obtenerLimite(producto.codigo),
             };
         });
 
@@ -83,6 +87,7 @@ window.Carrito = (function () {
                 !item ||
                 typeof item !== "object" ||
                 !buscarProducto(item.codigo) ||
+                obtenerLimite(item.codigo) === 0 ||
                 !esCantidadValida(item.cantidad)
             ) {
                 continue;
@@ -91,18 +96,19 @@ window.Carrito = (function () {
             const repetido = validos.find(function (actual) {
                 return actual.codigo === item.codigo;
             });
+            const limite = obtenerLimite(item.codigo);
 
             if (repetido) {
                 repetido.cantidad = Math.min(
                     repetido.cantidad + item.cantidad,
-                    CANTIDAD_MAXIMA,
+                    limite,
                 );
             } else {
-                // Los precios y nombres se consultan en productos.js.
+                // Los precios y nombres se consultan en el catálogo actual.
                 // No se confía en precios manipulados dentro de localStorage.
                 validos.push({
                     codigo: item.codigo,
-                    cantidad: item.cantidad,
+                    cantidad: Math.min(item.cantidad, limite),
                 });
             }
         }
@@ -135,7 +141,7 @@ window.Carrito = (function () {
 
             if (JSON.stringify(datos) !== JSON.stringify(validos)) {
                 avisoAlmacenamiento =
-                    "Se recuperaron los productos válidos del carrito. " +
+                    "Se ajustó el carrito al catálogo y stock disponibles. " +
                     "Revisa las cantidades antes de continuar.";
             }
 
@@ -194,10 +200,13 @@ window.Carrito = (function () {
         });
         const nuevaCantidad = (existente ? existente.cantidad : 0) + cantidad;
 
-        if (nuevaCantidad > CANTIDAD_MAXIMA) {
+        const limite = obtenerLimite(codigo);
+
+        if (nuevaCantidad > limite) {
             return {
                 exito: false,
-                mensaje: `Puedes agregar hasta ${CANTIDAD_MAXIMA} unidades de cada producto.`,
+                mensaje: limite === 0 ? "El producto está agotado." :
+                    `Puedes tener hasta ${limite} unidades de este producto según el stock disponible.`,
             };
         }
 
@@ -221,6 +230,15 @@ window.Carrito = (function () {
 
         if (!item) {
             return { exito: false, mensaje: "El producto ya no está en el carrito." };
+        }
+
+        const limite = obtenerLimite(codigo);
+
+        if (cantidad > limite) {
+            return {
+                exito: false,
+                mensaje: `La cantidad supera el stock disponible: máximo ${limite} unidades.`,
+            };
         }
 
         item.cantidad = cantidad;
@@ -253,6 +271,19 @@ window.Carrito = (function () {
 
     // 4. SINCRONIZACIÓN ENTRE PESTAÑAS Y NAVEGACIÓN HACIA ATRÁS
 
+    window.addEventListener("productos:actualizados", function () {
+        const nuevosItems = normalizarItems(items);
+
+        if (JSON.stringify(nuevosItems) !== JSON.stringify(items)) {
+            items = nuevosItems;
+            guardarCarrito();
+            avisoCatalogo = "El catálogo cambió: se ajustaron las cantidades o se retiraron productos del carrito.";
+        }
+
+        // También recalcula totales si cambian el nombre o el precio del producto.
+        avisarCambio();
+    });
+
     window.addEventListener("storage", function (evento) {
         if (evento.key === CLAVE_ALMACENAMIENTO || evento.key === null) {
             items = cargarCarrito();
@@ -272,6 +303,7 @@ window.Carrito = (function () {
         CANTIDAD_MAXIMA,
         CLAVE_ALMACENAMIENTO,
         buscarProducto,
+        obtenerLimite,
         obtenerItems,
         obtenerResumen,
         agregar,
@@ -279,7 +311,7 @@ window.Carrito = (function () {
         eliminar,
         vaciar,
         obtenerAviso: function () {
-            return avisoAlmacenamiento;
+            return [avisoAlmacenamiento, avisoCatalogo].filter(Boolean).join(" ");
         },
     };
 })();

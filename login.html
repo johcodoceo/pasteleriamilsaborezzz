@@ -14,11 +14,25 @@
         <!-- defer conserva el orden y espera a que exista el HTML. -->
         <script defer src="js/productos.js">
         </script>
+        <script defer src="js/validaciones.js"></script>
+        <script defer src="js/inventario.js"></script>
         <script defer src="js/utilidades.js">
         </script>
         <script defer src="js/carrito.js">
         </script>
         <script defer src="js/principal.js">
+        </script>
+
+        <!-- Validaciones compartidas y controlador de esta vista. -->
+        <script defer src="js/regiones.js">
+        </script>
+        <script defer src="js/credenciales-demo.js">
+        </script>
+        <script defer src="js/cuentas-demo.js">
+        </script>
+        <script defer src="js/formularios.js">
+        </script>
+        <script defer src="js/login.js">
         </script>
     </head>
     <body>
@@ -84,17 +98,102 @@
                 </p>
             </noscript>
             <section class="page-heading container">
-                <p class="eyebrow">PRÓXIMAMENTE</p>
-                <h1>Bienvenido a Mil Sabores.</h1>
-                <p class="lede">El acceso a cuentas todavía no está habilitado.</p>
+                <p class="eyebrow">MIL SABORES</p>
+                <h1>Qué gusto verte de nuevo.</h1>
+                <p class="lede">Ingresa con la cuenta que registraste en este navegador.</p>
             </section>
-            <section class="container pending-wrap">
-                <div class="pending">
-                    <span class="small-label">Estamos preparando esta sección</span>
-                    <h2>Un paso más cerca de tu próxima celebración.</h2>
-                    <p>Mientras tanto, descubre nuestra selección de tortas y repostería.</p>
-                    <a class="button" href="registro.html">Conocer el registro</a>
-                </div>
+            <section class="container forms-section form-narrow">
+                <p class="demo-note">
+                    Acceso local de demostración. Los perfiles permiten practicar las acciones
+                    de cada usuario; no es una cuenta real.
+                </p>
+                <form id="formulario-login" class="form-panel" novalidate>
+                    <div
+                        class="form-result"
+                        data-resultado
+                        role="status"
+                        tabindex="-1"
+                        hidden
+                    >
+                    </div>
+                    <div class="form-field">
+                        <label for="correo">Correo electrónico</label>
+                        <p id="ayuda-correo" class="field-help">
+                            Usa @duoc.cl, @profesor.duoc.cl o @gmail.com.
+                        </p>
+                        <input
+                            id="correo"
+                            name="correo"
+                            data-validar
+                            aria-describedby="ayuda-correo error-correo"
+                            required
+                            autocomplete="username"
+                            maxlength="100"
+                            type="email"
+                        >
+                        <p
+                            id="error-correo"
+                            class="field-error"
+                            data-error-para="correo"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <div class="form-field">
+                        <label for="contrasena">Contraseña</label>
+                        <p id="ayuda-contrasena" class="field-help">Entre 4 y 10 caracteres.</p>
+                        <div class="password-control">
+                            <input
+                                id="contrasena"
+                                name="contrasena"
+                                data-validar
+                                aria-describedby="ayuda-contrasena error-contrasena"
+                                required
+                                autocomplete="current-password"
+                                maxlength="10"
+                                minlength="4"
+                                type="password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-mostrar-clave="contrasena"
+                                aria-controls="contrasena"
+                                aria-pressed="false"
+                            >
+                                Mostrar
+                            </button>
+                        </div>
+                        <p
+                            id="error-contrasena"
+                            class="field-error"
+                            data-error-para="contrasena"
+                            aria-live="polite"
+                            hidden
+                        >
+                        </p>
+                    </div>
+                    <div class="form-actions">
+                        <button class="button" type="submit">Iniciar sesión</button>
+                        <a class="text-link" href="registro.html">Crear una cuenta</a>
+                    </div>
+                </form>
+                <section id="sesion-activa" class="form-panel success-panel" hidden>
+                    <p class="eyebrow">MI CUENTA</p>
+                    <h2 tabindex="-1">Hola, <span data-nombre-sesion></span>.</h2>
+                    <p data-correo-sesion></p>
+                    <p>Tu sesión de demostración está activa en esta pestaña.</p>
+                    <div class="form-actions">
+                        <a class="button" href="productos.html">Explorar productos</a>
+                        <a id="ir-administracion" class="button button-outline" href="admin/index.html" hidden>
+                            Abrir panel de gestión
+                        </a>
+                        <button id="cerrar-sesion" class="text-button" type="button">
+                            Cerrar sesión
+                        </button>
+                    </div>
+                </section>
             </section>
         </main>
 

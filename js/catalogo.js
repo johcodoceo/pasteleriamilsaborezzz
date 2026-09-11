@@ -2,7 +2,7 @@
 
 /*
  * CATÁLOGO Y PRODUCTOS DESTACADOS
- * Los datos están en productos.js; las operaciones están en carrito.js.
+ * Inventario entrega el catálogo actual; carrito.js atiende la selección.
  */
 (function () {
     const codigosDestacados = ["TC001", "TT002", "PI002", "PV001"];
@@ -13,9 +13,14 @@
         const descripcion = Utilidades.escaparHTML(producto.descripcion);
         const codigo = Utilidades.escaparHTML(producto.codigo);
         const enlace = `producto.html?id=${encodeURIComponent(producto.codigo)}`;
+        const imagen = producto.imagen ? `
+            <img class="catalog-image" src="${Utilidades.escaparHTML(producto.imagen)}"
+                alt="${nombre}" loading="lazy" width="480" height="320">
+        ` : "";
 
         return `
             <article class="product-card">
+                ${imagen}
                 <span class="product-category">${categoria}</span>
                 <h3>
                     <a href="${enlace}">${nombre}</a>
@@ -34,21 +39,38 @@
                     type="button"
                     data-agregar="${codigo}"
                     aria-label="Agregar ${nombre} al carrito"
+                    ${producto.stock === 0 ? "disabled" : ""}
                 >
-                    Agregar al carrito
+                    ${producto.stock === 0 ? "Agotado" : "Agregar al carrito"}
                 </button>
             </article>
         `;
     }
 
     document.querySelectorAll("[data-products]").forEach(function (grilla) {
-        const seleccion = grilla.dataset.products === "featured"
-            ? PRODUCTOS.filter(function (producto) {
-                return codigosDestacados.includes(producto.codigo);
-            })
-            : PRODUCTOS;
+        function actualizar() {
+            const productos = Inventario.listar();
+            const seleccion = grilla.dataset.products === "featured"
+                ? productos.filter(function (producto) {
+                    return codigosDestacados.includes(producto.codigo);
+                })
+                : productos;
 
-        grilla.innerHTML = seleccion.map(crearTarjeta).join("");
+            grilla.innerHTML = seleccion.length ? seleccion.map(crearTarjeta).join("") :
+                '<p class="quiet-note">No hay productos disponibles en esta selección.</p>';
+
+            grilla.querySelectorAll("img").forEach(function (imagen) {
+                imagen.addEventListener("error", function () {
+                    imagen.hidden = true;
+                });
+            });
+            document.querySelectorAll("[data-total-productos]").forEach(function (contador) {
+                contador.textContent = productos.length;
+            });
+        }
+
+        window.addEventListener("productos:actualizados", actualizar);
+        actualizar();
 
         // Un solo listener atiende todos los botones de esta grilla.
         grilla.addEventListener("click", function (evento) {
