@@ -242,6 +242,7 @@ window.Validaciones = (function () {
         });
     }
 
+<<<<<<< HEAD
     // 5. MANTENEDORES: REGLAS ADICIONALES, SIN DUPLICAR LAS DEL REGISTRO
 
     function validarNumero(valor, nombre, opciones = {}) {
@@ -330,6 +331,8 @@ window.Validaciones = (function () {
         return soloErrores(errores);
     }
 
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
     return {
         DOMINIOS_PERMITIDOS,
         TIPOS_USUARIO,
@@ -345,9 +348,12 @@ window.Validaciones = (function () {
         validarRegistro,
         validarLogin,
         validarContacto,
+<<<<<<< HEAD
         validarNumero,
         validarImagen,
         validarProducto,
         validarUsuarioAdministrativo,
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
     };
 })();

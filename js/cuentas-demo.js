@@ -3,7 +3,11 @@
 /*
  * CUENTAS LOCALES DE DEMOSTRACIÓN
  * Registro persistente en este navegador y sesión limitada a esta pestaña.
+<<<<<<< HEAD
  * Los perfiles simulan permisos de interfaz para EV1; no son seguridad de servidor.
+=======
+ * No protege rutas ni concede permisos administrativos.
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
  */
 window.CuentasDemo = (function () {
     const CLAVE_USUARIOS = "milSabores.usuarios.v1";
@@ -63,6 +67,7 @@ window.CuentasDemo = (function () {
                 "Revisa los permisos de almacenamiento del navegador e inténtalo otra vez.",
             );
         }
+<<<<<<< HEAD
 
         avisar("cuentas:actualizadas");
     }
@@ -71,6 +76,8 @@ window.CuentasDemo = (function () {
         if (typeof window.dispatchEvent === "function") {
             window.dispatchEvent(new CustomEvent(tipo));
         }
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
     }
 
     function datosPublicos(usuario) {
@@ -79,6 +86,7 @@ window.CuentasDemo = (function () {
         return datos;
     }
 
+<<<<<<< HEAD
     function buscarDuplicados(usuarios, run, correo, runExcluido = null) {
         const errores = {};
 
@@ -87,6 +95,16 @@ window.CuentasDemo = (function () {
         });
         const correoExiste = usuarios.some(function (usuario) {
             return usuario.run !== runExcluido && usuario.correo === correo;
+=======
+    function buscarDuplicados(usuarios, run, correo) {
+        const errores = {};
+
+        const runExiste = usuarios.some(function (usuario) {
+            return usuario.run === run;
+        });
+        const correoExiste = usuarios.some(function (usuario) {
+            return usuario.correo === correo;
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
         });
 
         if (runExiste) {
@@ -100,6 +118,7 @@ window.CuentasDemo = (function () {
         return errores;
     }
 
+<<<<<<< HEAD
     function construirUsuario(datos, credencial, anterior = null) {
         return {
             run: Validaciones.texto(datos.run).toUpperCase(),
@@ -117,6 +136,8 @@ window.CuentasDemo = (function () {
         };
     }
 
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
     // 2. REGISTRO: REUTILIZA LAS MISMAS REGLAS QUE EL FORMULARIO
 
     async function registrar(datos) {
@@ -145,8 +166,26 @@ window.CuentasDemo = (function () {
             return { exito: false, mensaje: "La cuenta ya existe.", errores: duplicados };
         }
 
+<<<<<<< HEAD
         // Se ignora cualquier perfil añadido manualmente al registro público.
         const usuario = construirUsuario({ ...datos, tipoUsuario: "Cliente" }, credencial);
+=======
+        const usuario = {
+            run,
+            nombre: Validaciones.texto(datos.nombre),
+            apellidos: Validaciones.texto(datos.apellidos),
+            correo,
+            nacimiento: Validaciones.texto(datos.nacimiento),
+            region: datos.region,
+            comuna: datos.comuna,
+            direccion: Validaciones.texto(datos.direccion),
+            codigoPromocional: Validaciones.texto(datos.codigoPromocional).toUpperCase(),
+            // Se ignora cualquier perfil añadido manualmente al registro público.
+            tipoUsuario: "Cliente",
+            creadoEn: new Date().toISOString(),
+            credencial,
+        };
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
 
         usuarios.push(usuario);
         guardarUsuarios(usuarios);
@@ -182,8 +221,11 @@ window.CuentasDemo = (function () {
             throw new Error("No se pudo iniciar la sesión en esta pestaña.");
         }
 
+<<<<<<< HEAD
         avisar("sesion:actualizada");
 
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
         return {
             exito: true,
             mensaje: "Sesión de demostración iniciada.",
@@ -231,6 +273,7 @@ window.CuentasDemo = (function () {
         }
 
         // No se borran las cuentas, el carrito ni otras preferencias.
+<<<<<<< HEAD
         avisar("sesion:actualizada");
         return { exito: true, mensaje: "Sesión de demostración cerrada." };
     }
@@ -442,6 +485,11 @@ window.CuentasDemo = (function () {
         return { exito: true, mensaje: "Cuentas preparadas. Inicia sesión con las credenciales de ejemplo." };
     }
 
+=======
+        return { exito: true, mensaje: "Sesión de demostración cerrada." };
+    }
+
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
     return {
         CLAVE_USUARIOS,
         CLAVE_SESION,
@@ -449,6 +497,7 @@ window.CuentasDemo = (function () {
         iniciarSesion,
         obtenerSesion,
         cerrarSesion,
+<<<<<<< HEAD
         exigirAdministrador,
         listarUsuarios,
         obtenerUsuario,
@@ -456,5 +505,7 @@ window.CuentasDemo = (function () {
         eliminarUsuario,
         hayAdministrador,
         prepararDemostracion,
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
     };
 })();

@@ -1595,6 +1595,7 @@ input[aria-invalid="true"] {
         width: 100%;
     }
 }
+<<<<<<< HEAD
 
 /* 12. MANTENEDORES DE PRODUCTOS Y USUARIOS */
 .button.button-outline {
@@ -1888,3 +1889,5 @@ input[aria-invalid="true"] {
         gap: 16px;
     }
 }
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e

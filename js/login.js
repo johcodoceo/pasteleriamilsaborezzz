@@ -29,10 +29,13 @@
             if (usuario) {
                 panel.querySelector("[data-nombre-sesion]").textContent = usuario.nombre;
                 panel.querySelector("[data-correo-sesion]").textContent = usuario.correo;
+<<<<<<< HEAD
                 const enlacePanel = panel.querySelector("#ir-administracion");
                 enlacePanel.hidden = usuario.tipoUsuario === "Cliente";
                 enlacePanel.href = usuario.tipoUsuario === "Vendedor"
                     ? "admin/productos.html" : "admin/index.html";
+=======
+>>>>>>> 709361959d35919bd602e5a089910d094d32dc5e
 
                 if (enfocar) {
                     panel.querySelector("h2").focus();
