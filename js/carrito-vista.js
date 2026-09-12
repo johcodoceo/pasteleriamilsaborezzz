@@ -142,7 +142,7 @@
         contenido.hidden = estaVacio;
         estadoVacio.hidden = !estaVacio;
         document.querySelector("#resumen-unidades").textContent = resumen.unidades;
-        document.querySelector("#resumen-total").textContent = Utilidades.formatearPrecio(resumen.total);
+        // beneficios-vista.js presenta subtotal, descuentos y total después de actualizar las filas.
 
         if (indiceFoco !== -1 && !focoAnterior.isConnected) {
             if (estaVacio) {

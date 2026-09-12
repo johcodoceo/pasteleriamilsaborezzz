@@ -110,7 +110,9 @@ window.CuentasDemo = (function () {
             region: datos.region,
             comuna: datos.comuna,
             direccion: Validaciones.texto(datos.direccion),
-            codigoPromocional: Validaciones.texto(datos.codigoPromocional).toUpperCase(),
+            // Se conserva el código de alta: el beneficio FELICES50 no caduca al editar la cuenta.
+            codigoPromocional: anterior ? anterior.codigoPromocional :
+                Validaciones.texto(datos.codigoPromocional).toUpperCase(),
             tipoUsuario: datos.tipoUsuario,
             creadoEn: anterior ? anterior.creadoEn : new Date().toISOString(),
             credencial,

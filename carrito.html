@@ -25,6 +25,11 @@
         <script defer src="js/personalizacion.js"></script>
         <script defer src="js/carrito-vista.js">
         </script>
+        <script defer src="js/regiones.js"></script>
+        <script defer src="js/credenciales-demo.js"></script>
+        <script defer src="js/cuentas-demo.js"></script>
+        <script defer src="js/beneficios.js"></script>
+        <script defer src="js/beneficios-vista.js"></script>
     </head>
     <body>
         <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -37,9 +42,14 @@
         <!-- Cabecera compartida y navegación principal. -->
         <header class="site-header">
             <div class="container header-inner">
-                <a class="brand" href="index.html" aria-label="Mil Sabores, inicio">
-                    <span class="brand-name">Mil Sabores<span class="brand-dot">.</span></span>
-                    <span class="brand-caption">PASTELERÍA · DESDE EL CORAZÓN</span>
+                <a class="brand" href="index.html" aria-label="Pastelería Mil Sabores, inicio">
+                    <img
+                        class="brand-logo"
+                        src="assets/logo-mil-sabores.png"
+                        width="346"
+                        height="379"
+                        alt=""
+                    >
                 </a>
                 <button
                     class="menu-toggle"
@@ -121,7 +131,7 @@
                 <aside class="cart-summary" aria-labelledby="titulo-resumen">
                     <p class="eyebrow">TU CELEBRACIÓN</p>
                     <h2 id="titulo-resumen">Resumen</h2>
-                    <dl>
+                    <dl id="resumen-beneficios">
                         <div>
                             <dt>
                                 Unidades
@@ -130,16 +140,56 @@
                                 0
                             </dd>
                         </div>
+                        <div>
+                            <dt>Subtotal</dt>
+                            <dd id="resumen-subtotal">$0</dd>
+                        </div>
+                        <div class="cart-discount">
+                            <dt>Descuentos</dt>
+                            <dd id="resumen-descuento">$0</dd>
+                        </div>
                         <div class="cart-total">
                             <dt>
-                                Total de productos
+                                Total
                             </dt>
                             <dd id="resumen-total" aria-live="polite" aria-atomic="true">
                                 $0
                             </dd>
                         </div>
                     </dl>
-                    <p class="field-help">Precios en pesos chilenos. Sin descuentos ni despacho.</p>
+                    <p class="field-help">Precios en pesos chilenos. Despacho no incluido.</p>
+                    <div class="cart-benefits">
+                        <h3>Tus beneficios</h3>
+                        <p id="beneficios-cuenta"></p>
+                        <a class="text-link" href="login.html">Revisar mi cuenta</a>
+                        <p id="aviso-beneficios" class="field-error" role="status" hidden></p>
+                        <ul id="beneficios-aplicados" hidden>
+                            <li id="beneficio-cumpleanos" hidden></li>
+                            <li id="beneficio-porcentaje" hidden></li>
+                        </ul>
+                        <p id="sin-beneficios" class="field-help" hidden>
+                            No hay beneficios aplicables a esta selección con los datos de tu cuenta.
+                        </p>
+                        <div id="invitacion-cumpleanos" hidden>
+                            <p id="estado-torta-cumpleanos"></p>
+                            <a id="elegir-torta-cumpleanos" class="text-link" href="producto.html?id=TE001">
+                                Elegir mi torta de cumpleaños
+                            </a>
+                        </div>
+                        <details class="benefit-conditions">
+                            <summary>Condiciones de los beneficios</summary>
+                            <ul>
+                                <li>50% desde los 51 años cumplidos, según tu fecha de nacimiento.</li>
+                                <li>10% por registrarte con FELICES50. Se aplica el mayor porcentaje.</li>
+                                <li>Una unidad de la torta TE001 gratis en tu cumpleaños con correo @duoc.cl.</li>
+                                <li>El porcentaje se calcula después de restar la unidad gratuita.</li>
+                            </ul>
+                            <p class="field-help">
+                                Se usa la fecha de Santiago de Chile. Los cumpleaños del 29 de febrero
+                                se consideran el 28 en años no bisiestos. Los beneficios requieren sesión iniciada.
+                            </p>
+                        </details>
+                    </div>
                     <p class="quiet-note">
                         La confirmación de pedidos y el pago aún no están disponibles.
                     </p>
@@ -200,6 +250,9 @@
                     <div class="cart-line-total">
                         <span class="field-help">Subtotal</span>
                         <strong data-subtotal></strong>
+                        <p class="cart-gift-label" data-regalo-cumpleanos hidden>
+                            Cumpleaños: una unidad gratis, descontada en el resumen.
+                        </p>
                         <button class="text-button" type="button" data-accion="eliminar">
                             Eliminar
                         </button>

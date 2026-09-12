@@ -111,6 +111,7 @@
         }
 
         formulario.elements.run.readOnly = Boolean(usuario);
+        formulario.elements.codigoPromocional.readOnly = Boolean(usuario);
         formulario.elements.contrasena.required = !usuario;
         formulario.elements.confirmacion.required = !usuario;
         document.querySelector("#ayuda-contrasena").textContent = usuario

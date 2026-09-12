@@ -79,7 +79,7 @@ h3 {
 
 h1,
 h2 {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: Pacifico, Georgia, 'Times New Roman', cursive;
     font-weight: 400;
 }
 
@@ -151,6 +151,11 @@ p {
     display: inline-flex;
     flex-direction: column;
     flex-shrink: 0;
+}
+
+.brand-logo {
+    width: 94px;
+    height: auto;
 }
 
 .brand-name {
@@ -329,7 +334,7 @@ p {
 .anniversary-seal {
     position: absolute;
     top: 32px;
-    right: -15px;
+    right: 12px;
     background: var(--pink);
     border: 5px solid var(--paper);
     outline: 1px solid #ba7574;
@@ -494,7 +499,7 @@ p {
 .story-number {
     position: absolute;
     font: 15rem Georgia;
-    right: -5px;
+    right: 0;
     bottom: -96px;
     color: #e9cabb;
     opacity: .7;
@@ -826,6 +831,10 @@ p {
         font-size: .6rem;
     }
 
+    .brand-logo {
+        width: 84px;
+    }
+
     .brand-name {
         font-size: 1.8rem;
     }
@@ -1051,6 +1060,10 @@ p {
         left: 14px;
         right: 14px;
         font-size: .9375rem;
+    }
+
+    .brand-logo {
+        width: 72px;
     }
 
     .brand-name {
@@ -1693,6 +1706,7 @@ input[aria-invalid="true"] {
 }
 
 .table-scroll {
+    position: relative;
     max-width: 100%;
     overflow-x: auto;
     border: 1px solid var(--line);
@@ -2111,4 +2125,53 @@ input[aria-invalid="true"] {
     .order-total {
         justify-content: space-between;
     }
+}
+
+/* 16. BENEFICIOS: DESGLOSE DEL TOTAL Y CONDICIONES DE LA CUENTA */
+
+.cart-discount dd {
+    font-weight: 700;
+}
+
+.cart-benefits {
+    border-top: 1px solid var(--line);
+    margin-top: 20px;
+    padding-top: 20px;
+    font-size: 0.9375rem;
+    overflow-wrap: anywhere;
+}
+
+.cart-benefits h3 {
+    margin: 0 0 12px;
+    font-size: 1.125rem;
+}
+
+.cart-benefits p {
+    margin-block: 12px;
+}
+
+.cart-benefits ul {
+    padding-left: 22px;
+    margin-block: 16px;
+}
+
+.cart-benefits li + li {
+    margin-top: 10px;
+}
+
+.benefit-conditions {
+    margin-top: 16px;
+}
+
+.benefit-conditions summary {
+    padding-block: 12px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cart-gift-label {
+    margin: 8px 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
 }

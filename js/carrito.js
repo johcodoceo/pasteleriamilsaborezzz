@@ -77,31 +77,33 @@ window.Carrito = (function () {
 
     function obtenerResumen() {
         let unidades = 0;
-        let total = 0;
+        let totalCentavos = 0;
 
         const detalle = items.map(function (item) {
             const producto = buscarProducto(item.codigo);
-            const subtotal = producto.precio * item.cantidad;
+            // Redondear la unidad antes de multiplicar mantiene iguales los importes visibles.
+            const precioCentavos = Math.round((producto.precio + Number.EPSILON) * 100);
+            const subtotalCentavos = precioCentavos * item.cantidad;
             const otrasUnidades = contarUnidades(item.codigo) - item.cantidad;
 
             unidades += item.cantidad;
-            total += subtotal;
+            totalCentavos += subtotalCentavos;
 
             return {
                 claveLinea: crearClaveLinea(item.codigo, item.mensaje),
                 codigo: item.codigo,
                 nombre: producto.nombre,
                 categoria: producto.categoria,
-                precio: producto.precio,
+                precio: precioCentavos / 100,
                 cantidad: item.cantidad,
                 mensaje: item.mensaje,
                 personalizable: producto.personalizable,
-                subtotal,
+                subtotal: subtotalCentavos / 100,
                 limite: obtenerLimite(item.codigo) - otrasUnidades,
             };
         });
 
-        return { detalle, unidades, total };
+        return { detalle, unidades, total: totalCentavos / 100 };
     }
 
     // 2. RECUPERACIÓN: MENSAJES VÁLIDOS Y STOCK COMPARTIDO
